@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:kalle/animations/calendar_scroll.dart';
 import 'package:kalle/calendar_sheet.dart';
 
 void main() {
@@ -138,7 +139,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
                 child: AnimatedSwitcher(
                   child: calendarSheet,
-                  duration: Duration(seconds: 1),
+                  duration: Duration(milliseconds: 400),
+                  transitionBuilder: (child, animation) {
+                    return ClipRect(
+                      child: SlideTransition(
+                        position: offsetAnimation.animate(animation),
+                        child: child,
+                      ),
+                    );
+                  },
+                  layoutBuilder: (currentChild, previousChildren) =>
+                      currentChild,
                 ),
               ),
             ),
