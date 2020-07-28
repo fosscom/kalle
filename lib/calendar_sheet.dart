@@ -78,23 +78,31 @@ class CalendarSheetBody extends StatelessWidget {
                           row * 7 + column - _weekDayOfFirstDayOfMonth + 2;
 
                       var color = Colors.black54;
+                      var fontWeight = FontWeight.bold;
+                      bool newMonthFlag = false;
 
                       if (day < 1) {
                         day += _lastDayOfLastMonth;
                         color = Colors.black26;
+                        fontWeight = FontWeight.normal;
                       } else if (day > _lastDayOfMonth) {
                         day -= _lastDayOfMonth;
                         color = Colors.black26;
+                        fontWeight = FontWeight.normal;
+                        newMonthFlag = true;
                       }
 
                       return Container(
                         child: Text(
                           day == 1
-                              ? day.toString() + '.' + _month.toString() + '.'
+                              ? day.toString() +
+                                  '. ' +
+                                  (newMonthFlag
+                                      ? NameOfMonth(_month + 1)
+                                      : NameOfMonth(_month))
                               : day.toString(),
-                          style: TextStyle(
-                            color: color,
-                          ),
+                          style:
+                              TextStyle(color: color, fontWeight: fontWeight),
                         ),
                         margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                       );

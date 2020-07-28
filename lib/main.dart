@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:kalle/calendar_sheet.dart';
+import 'package:kalle/utils/date.dart';
 
 void main() {
   runApp(MyApp());
@@ -71,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 12,
                 (index) => DropdownMenuItem<int>(
                   value: 1 + index,
-                  child: new Text((1 + index).toString()),
+                  child: new Text(NameOfMonth(index + 1)),
                 ),
               ),
               onChanged: (val) {
