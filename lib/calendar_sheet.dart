@@ -64,7 +64,7 @@ class CalendarSheetBody extends StatelessWidget {
                 7,
                 (column) => Expanded(
                   child: Container(
-                    alignment: Alignment.center,
+                    alignment: Alignment.topCenter,
                     decoration: BoxDecoration(
                       border: Border(
                         top: BorderSide(color: Colors.grey),
@@ -96,6 +96,7 @@ class CalendarSheetBody extends StatelessWidget {
                             color: color,
                           ),
                         ),
+                        margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                       );
                     }),
                   ),
