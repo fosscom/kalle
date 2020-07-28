@@ -6,7 +6,7 @@ class CalendarSheet extends StatelessWidget {
   int lastDayOfLastMonth;
   int weekDayOfFirstDayOfMonth;
   int lastDayOfMonth;
-  CalendarSheet(this._date) {
+  CalendarSheet(this._date, {Key key}) : super(key: key) {
     lastDayOfLastMonth = DateTime(this._date.year, this._date.month, 0).day;
     weekDayOfFirstDayOfMonth =
         DateTime(this._date.year, this._date.month, 1).weekday;
