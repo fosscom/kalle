@@ -58,7 +58,7 @@ class CalendarSheetBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: List<Widget>.generate(
-          5,
+          ((_lastDayOfMonth + _weekDayOfFirstDayOfMonth - 1) / 7).ceil(),
           (row) => Expanded(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
