@@ -47,6 +47,15 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
         actions: [
+          OutlineButton(
+            onPressed: () {
+              setState(() {
+                month = today.month;
+                year = today.year;
+              });
+            },
+            child: Text("Today"),
+          ),
           DropdownButton<int>(
               value: month,
               items: List<DropdownMenuItem<int>>.generate(
