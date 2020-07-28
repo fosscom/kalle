@@ -47,14 +47,23 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
         actions: [
-          OutlineButton(
-            onPressed: () {
-              setState(() {
-                month = today.month;
-                year = today.year;
-              });
-            },
-            child: Text("Today"),
+          Container(
+            child: FlatButton(
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              onPressed: () {
+                setState(() {
+                  year = this.today.year;
+                  month = this.today.month;
+                });
+              },
+              child: Text("Today"),
+              padding: EdgeInsets.all(0.0),
+            ),
+            margin: EdgeInsets.fromLTRB(10, 10, 20, 10),
+            width: 80,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                border: Border.all(color: Colors.grey)),
           ),
           DropdownButton<int>(
               value: month,
