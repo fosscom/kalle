@@ -67,24 +67,24 @@ class CalendarSheetBody extends StatelessWidget {
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       border: Border(
-                        top: BorderSide(),
+                        top: BorderSide(color: Colors.grey),
                         left: column == 0
                             ? BorderSide.none
-                            : BorderSide(color: Colors.black),
+                            : BorderSide(color: Colors.grey),
                       ),
                     ),
                     child: Builder(builder: (BuildContext context) {
                       var day =
                           row * 7 + column - _weekDayOfFirstDayOfMonth + 2;
 
-                      var color = Colors.black;
+                      var color = Colors.black54;
 
                       if (day < 1) {
                         day += _lastDayOfLastMonth;
-                        color = Colors.grey;
+                        color = Colors.black26;
                       } else if (day > _lastDayOfMonth) {
                         day -= _lastDayOfMonth;
-                        color = Colors.grey;
+                        color = Colors.black26;
                       }
 
                       return Container(
