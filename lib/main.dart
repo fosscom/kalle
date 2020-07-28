@@ -29,8 +29,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int month = 7;
-  int year = 2020;
+  DateTime today = new DateTime.now();
+  int month;
+  int year;
+
+  @override
+  void initState() {
+    super.initState();
+    // initialze starting date with todays date
+    month = this.today.month;
+    year = this.today.year;
+  }
 
   @override
   Widget build(BuildContext context) {
