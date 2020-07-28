@@ -17,11 +17,8 @@ class CalendarSheet extends StatelessWidget {
       child: Column(
         children: [
           CalendarSheetHeader(),
-          CalendarSheetBody(
-            lastDayOfLastMonth,
-            weekDayOfFirstDayOfMonth,
-            lastDayOfMonth,
-          ),
+          CalendarSheetBody(lastDayOfLastMonth, weekDayOfFirstDayOfMonth,
+              lastDayOfMonth, _date.month),
         ],
       ),
     );
@@ -51,8 +48,9 @@ class CalendarSheetBody extends StatelessWidget {
   final int _lastDayOfLastMonth;
   final int _weekDayOfFirstDayOfMonth;
   final int _lastDayOfMonth;
+  final int _month;
   CalendarSheetBody(this._lastDayOfLastMonth, this._weekDayOfFirstDayOfMonth,
-      this._lastDayOfMonth);
+      this._lastDayOfMonth, this._month);
   Widget build(BuildContext context) {
     return Expanded(
       child: Column(
@@ -89,10 +87,14 @@ class CalendarSheetBody extends StatelessWidget {
                         color = Colors.grey;
                       }
 
-                      return Text(
-                        day.toString(),
-                        style: TextStyle(
-                          color: color,
+                      return Container(
+                        child: Text(
+                          day == 1
+                              ? day.toString() + '.' + _month.toString() + '.'
+                              : day.toString(),
+                          style: TextStyle(
+                            color: color,
+                          ),
                         ),
                       );
                     }),
