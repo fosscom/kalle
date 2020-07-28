@@ -29,8 +29,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int month = 7;
-  int year = 2020;
+  DateTime today = new DateTime.now();
+  int month;
+  int year;
+
+  @override
+  void initState() {
+    super.initState();
+    // initialze starting date with todays date
+    month = this.today.month;
+    year = this.today.year;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +47,24 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
         actions: [
+          Container(
+            child: FlatButton(
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              onPressed: () {
+                setState(() {
+                  year = this.today.year;
+                  month = this.today.month;
+                });
+              },
+              child: Text("Today"),
+              padding: EdgeInsets.all(0.0),
+            ),
+            margin: EdgeInsets.fromLTRB(10, 10, 20, 10),
+            width: 80,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                border: Border.all(color: Colors.grey)),
+          ),
           DropdownButton<int>(
               value: month,
               items: List<DropdownMenuItem<int>>.generate(
