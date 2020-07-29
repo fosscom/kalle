@@ -6,7 +6,7 @@ class CalendarSheet extends StatelessWidget {
   int lastDayOfLastMonth;
   int weekDayOfFirstDayOfMonth;
   int lastDayOfMonth;
-  CalendarSheet(this._date) {
+  CalendarSheet(this._date, {Key key}) : super(key: key) {
     lastDayOfLastMonth = DateTime(this._date.year, this._date.month, 0).day;
     weekDayOfFirstDayOfMonth =
         DateTime(this._date.year, this._date.month, 1).weekday;
@@ -17,11 +17,8 @@ class CalendarSheet extends StatelessWidget {
       child: Column(
         children: [
           CalendarSheetHeader(),
-          CalendarSheetBody(
-            lastDayOfLastMonth,
-            weekDayOfFirstDayOfMonth,
-            lastDayOfMonth,
-          ),
+          CalendarSheetBody(lastDayOfLastMonth, weekDayOfFirstDayOfMonth,
+              lastDayOfMonth, _date.month),
         ],
       ),
     );
@@ -51,8 +48,9 @@ class CalendarSheetBody extends StatelessWidget {
   final int _lastDayOfLastMonth;
   final int _weekDayOfFirstDayOfMonth;
   final int _lastDayOfMonth;
+  final int _month;
   CalendarSheetBody(this._lastDayOfLastMonth, this._weekDayOfFirstDayOfMonth,
-      this._lastDayOfMonth);
+      this._lastDayOfMonth, this._month);
   Widget build(BuildContext context) {
     return Expanded(
       child: Column(
@@ -66,34 +64,47 @@ class CalendarSheetBody extends StatelessWidget {
                 7,
                 (column) => Expanded(
                   child: Container(
-                    alignment: Alignment.center,
+                    alignment: Alignment.topCenter,
                     decoration: BoxDecoration(
                       border: Border(
-                        top: BorderSide(),
+                        top: BorderSide(color: Colors.grey),
                         left: column == 0
                             ? BorderSide.none
-                            : BorderSide(color: Colors.black),
+                            : BorderSide(color: Colors.grey),
                       ),
                     ),
                     child: Builder(builder: (BuildContext context) {
                       var day =
                           row * 7 + column - _weekDayOfFirstDayOfMonth + 2;
 
-                      var color = Colors.black;
+                      var color = Colors.black54;
+                      var fontWeight = FontWeight.bold;
+                      bool newMonthFlag = false;
 
                       if (day < 1) {
                         day += _lastDayOfLastMonth;
-                        color = Colors.grey;
+                        color = Colors.black26;
+                        fontWeight = FontWeight.normal;
                       } else if (day > _lastDayOfMonth) {
                         day -= _lastDayOfMonth;
-                        color = Colors.grey;
+                        color = Colors.black26;
+                        fontWeight = FontWeight.normal;
+                        newMonthFlag = true;
                       }
 
-                      return Text(
-                        day.toString(),
-                        style: TextStyle(
-                          color: color,
+                      return Container(
+                        child: Text(
+                          day == 1
+                              ? day.toString() +
+                                  '. ' +
+                                  (newMonthFlag
+                                      ? NameOfMonth(_month + 1)
+                                      : NameOfMonth(_month))
+                              : day.toString(),
+                          style:
+                              TextStyle(color: color, fontWeight: fontWeight),
                         ),
+                        margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                       );
                     }),
                   ),
