@@ -1,4 +1,4 @@
-enum DayOfWeek { MON, TUE, WED, THU, FRI, SAT, SUN }
+enum DayOfWeek { Mon, Tue, Wed, Thu, Fri, Sat, Sun }
 enum MonthOfYear { Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec }
 
 extension MonthOfYearExtension on MonthOfYear {
@@ -89,51 +89,51 @@ String NameOfMonth(int month) {
 extension DayOfWeekExtension on DayOfWeek {
   String get name {
     switch (this) {
-      case DayOfWeek.MON:
+      case DayOfWeek.Mon:
         return "Mon";
 
-      case DayOfWeek.TUE:
+      case DayOfWeek.Tue:
         return "Tue";
 
-      case DayOfWeek.WED:
+      case DayOfWeek.Wed:
         return "Wed";
 
-      case DayOfWeek.THU:
+      case DayOfWeek.Thu:
         return "Thu";
 
-      case DayOfWeek.FRI:
+      case DayOfWeek.Fri:
         return "Fri";
 
-      case DayOfWeek.SAT:
+      case DayOfWeek.Sat:
         return "Sat";
 
-      case DayOfWeek.SUN:
+      case DayOfWeek.Sun:
         return "Sun";
     }
   }
 
   DayOfWeek get next {
     switch (this) {
-      case DayOfWeek.MON:
-        return DayOfWeek.TUE;
+      case DayOfWeek.Mon:
+        return DayOfWeek.Tue;
 
-      case DayOfWeek.TUE:
-        return DayOfWeek.WED;
+      case DayOfWeek.Tue:
+        return DayOfWeek.Wed;
 
-      case DayOfWeek.WED:
-        return DayOfWeek.THU;
+      case DayOfWeek.Wed:
+        return DayOfWeek.Thu;
 
-      case DayOfWeek.THU:
-        return DayOfWeek.FRI;
+      case DayOfWeek.Thu:
+        return DayOfWeek.Fri;
 
-      case DayOfWeek.FRI:
-        return DayOfWeek.SAT;
+      case DayOfWeek.Fri:
+        return DayOfWeek.Sat;
 
-      case DayOfWeek.SAT:
-        return DayOfWeek.SUN;
+      case DayOfWeek.Sat:
+        return DayOfWeek.Sun;
 
-      case DayOfWeek.SUN:
-        return DayOfWeek.MON;
+      case DayOfWeek.Sun:
+        return DayOfWeek.Mon;
     }
   }
 }
@@ -141,25 +141,25 @@ extension DayOfWeekExtension on DayOfWeek {
 DayOfWeek byWeekday(int weekday) {
   switch (weekday % 7) {
     case 0:
-      return DayOfWeek.SUN;
+      return DayOfWeek.Sun;
 
     case 1:
-      return DayOfWeek.MON;
+      return DayOfWeek.Mon;
 
     case 2:
-      return DayOfWeek.TUE;
+      return DayOfWeek.Tue;
 
     case 3:
-      return DayOfWeek.WED;
+      return DayOfWeek.Wed;
 
     case 4:
-      return DayOfWeek.THU;
+      return DayOfWeek.Thu;
 
     case 5:
-      return DayOfWeek.FRI;
+      return DayOfWeek.Fri;
 
     case 6:
-      return DayOfWeek.SAT;
+      return DayOfWeek.Sat;
   }
 }
 

@@ -33,6 +33,11 @@ class _MyHomePageState extends State<MyHomePage> {
   DateTime today = new DateTime.now();
   int month;
   int year;
+  CalendarSheet calendarSheet;
+
+  void updateCalendarSheet() {
+    calendarSheet = CalendarSheet(DateTime(year, month), key: UniqueKey());
+  }
 
   @override
   void initState() {
@@ -40,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // initialze starting date with todays date
     month = this.today.month;
     year = this.today.year;
+    updateCalendarSheet();
   }
 
   @override
@@ -55,6 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 setState(() {
                   year = this.today.year;
                   month = this.today.month;
+                  updateCalendarSheet();
                 });
               },
               child: Text("Today"),
@@ -78,6 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onChanged: (val) {
                 setState(() {
                   month = val;
+                  updateCalendarSheet();
                 });
               }),
           DropdownButton<int>(
@@ -92,6 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onChanged: (val) {
                 setState(() {
                   year = val;
+                  updateCalendarSheet();
                 });
               }),
         ],
@@ -114,6 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           year++;
                           month = 1;
                         }
+                        updateCalendarSheet();
                       });
                     } else {
                       setState(() {
@@ -122,11 +132,15 @@ class _MyHomePageState extends State<MyHomePage> {
                           year--;
                           month = 12;
                         }
+                        updateCalendarSheet();
                       });
                     }
                   }
                 },
-                child: CalendarSheet(DateTime(year, month)),
+                child: AnimatedSwitcher(
+                  child: calendarSheet,
+                  duration: Duration(seconds: 1),
+                ),
               ),
             ),
           ],
