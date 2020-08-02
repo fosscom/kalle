@@ -63,50 +63,70 @@ class CalendarSheetBody extends StatelessWidget {
               children: List<Widget>.generate(
                 7,
                 (column) => Expanded(
-                  child: Container(
-                    alignment: Alignment.topCenter,
-                    decoration: BoxDecoration(
-                      border: Border(
-                        top: BorderSide(color: Colors.grey),
-                        left: column == 0
-                            ? BorderSide.none
-                            : BorderSide(color: Colors.grey),
-                      ),
-                    ),
-                    child: Builder(builder: (BuildContext context) {
-                      var day =
-                          row * 7 + column - _weekDayOfFirstDayOfMonth + 2;
+                  child: InkWell(
+                    onTap: () {
+                      showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) {
+                            var day = row * 7 +
+                                column -
+                                _weekDayOfFirstDayOfMonth +
+                                2;
 
-                      var color = Colors.black54;
-                      var fontWeight = FontWeight.bold;
-                      bool newMonthFlag = false;
-
-                      if (day < 1) {
-                        day += _lastDayOfLastMonth;
-                        color = Colors.black26;
-                        fontWeight = FontWeight.normal;
-                      } else if (day > _lastDayOfMonth) {
-                        day -= _lastDayOfMonth;
-                        color = Colors.black26;
-                        fontWeight = FontWeight.normal;
-                        newMonthFlag = true;
-                      }
-
-                      return Container(
-                        child: Text(
-                          day == 1
-                              ? day.toString() +
-                                  '. ' +
-                                  (newMonthFlag
-                                      ? NameOfMonth(_month + 1)
-                                      : NameOfMonth(_month))
-                              : day.toString(),
-                          style:
-                              TextStyle(color: color, fontWeight: fontWeight),
+                            return Container(
+                              height: 200,
+                              child: Center(
+                                child: Text(day.toString()),
+                              ),
+                            );
+                          });
+                    },
+                    child: Container(
+                      alignment: Alignment.topCenter,
+                      decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide(color: Colors.grey),
+                          left: column == 0
+                              ? BorderSide.none
+                              : BorderSide(color: Colors.grey),
                         ),
-                        margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                      );
-                    }),
+                      ),
+                      child: Builder(builder: (BuildContext context) {
+                        var day =
+                            row * 7 + column - _weekDayOfFirstDayOfMonth + 2;
+
+                        var color = Colors.black54;
+                        var fontWeight = FontWeight.bold;
+                        bool newMonthFlag = false;
+                        DateTime today = DateTime.now();
+
+                        if (day < 1) {
+                          day += _lastDayOfLastMonth;
+                          color = Colors.black26;
+                          fontWeight = FontWeight.normal;
+                        } else if (day > _lastDayOfMonth) {
+                          day -= _lastDayOfMonth;
+                          color = Colors.black26;
+                          fontWeight = FontWeight.normal;
+                          newMonthFlag = true;
+                        }
+
+                        return Container(
+                          child: Text(
+                            day == 1
+                                ? day.toString() +
+                                    '. ' +
+                                    (newMonthFlag
+                                        ? NameOfMonth(_month + 1)
+                                        : NameOfMonth(_month))
+                                : day.toString(),
+                            style:
+                                TextStyle(color: color, fontWeight: fontWeight),
+                          ),
+                          margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                        );
+                      }),
+                    ),
                   ),
                 ),
               ),
